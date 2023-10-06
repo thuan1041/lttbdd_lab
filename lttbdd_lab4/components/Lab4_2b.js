@@ -19,6 +19,10 @@ function Lab4_2b() {
                     <Image style={styles.addImg} source={require("../assets/camera.png")}/>
                     <Text style={styles.addImgTxt}>Thêm hình ảnh</Text>
                 </TouchableOpacity>
+                    <TextInput style={styles.shareTxt} placeholder="Hãy chi sẻ những điều mà bạn thích về sản phẩm" multiline={true} numberOfLines={10}></TextInput>
+                <TouchableOpacity style={styles.shareWrapper}>
+                    <Text style={styles.btnGui}>Gửi</Text>
+                </TouchableOpacity>
             </View>
         </View>
     );
@@ -82,13 +86,67 @@ const styles = StyleSheet.create({
         top:10
     },
     addImgWrapper:{
-
+        display:"flex",
+        flexDirection:"row",
+        borderRadius:10,
+        borderStyle:"solid",
+        borderColor:"#1511EB",
+        alignItems:"center",
+        borderWidth:1,
+        width:293,
+        height:68,
+        top:30,
     },
     addImg:{
         width:39,
-        height:32
+        height:32,
+        marginLeft:30
     },
     addImgTxt:{
-
+        width:259,
+        height:21,
+        fontFamily:"Roboto",
+        fontWeight:700,
+        fontSize:18,
+        lineHeight:21.09,
+        textAlign:"center",
+        marginLeft:-20,
+    },
+    shareTxt:{
+        width:293,
+        height:222,
+        fontFamily:"Roboto",
+        fontWeight:700,
+        fontSize:18,
+        lineHeight:21.09,
+        textAlign:"center",
+        borderColor:"#C4C4C4",
+        borderRadius:10,
+        borderStyle:"solid",
+        borderWidth:1,
+        marginTop:60,
+        textAlign:"left",
+        padding:10,
+        opacity:0.5
+    },
+    shareWrapper:{
+        width:289,
+        height:41,
+        backgroundColor:'#0D5DB6',
+        marginTop:30,
+        borderRadius:4,
+        display:"flex",
+        alignItems:"center",
+        justifyContent:"center"
+    }, 
+    btnGui:{
+        width:222,
+        height:31,
+        fontFamily:"Roboto",
+        fontWeight:700,
+        fontSize:20,
+        lineHeight:23.44,
+        textAlign:"center",
+        color:"#ffffff"
     }
 })

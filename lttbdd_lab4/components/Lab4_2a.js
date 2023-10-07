@@ -1,18 +1,53 @@
-import { StyleSheet, Text, View, TouchableOpacity, TextInput, Image} from "react-native";
+import { useState } from "react";
+import { StyleSheet, Text, View, TouchableOpacity, TextInput, Image, Alert} from "react-native";
 
+const data =[
+    {
+        id:1,
+        name:"abc",
+        password:"12345678"
+    },
+    {
+        id:2,
+        name:"def",
+        password:"12345678"
+    },
+]
 function Lab4_2a() {
+    const [name,setName] = useState('');
+    const [password,setPassword] = useState('');
+    const [showPassword,setShowPassword] = useState(false);
+    const loginFunction = () => {
+        let check = false;
+        data.forEach((item) => {
+            if(item.name === name && item.password === password){
+                check = true;
+            }
+        })
+        if(check){
+            alert("Login success \n"+ `Username ${name}\n password: ${password} `)   
+        }
+        else{
+            alert("Login fail")   
+        }
+    }
     return (  
         <View style={style.container}>
             <Text style={style.textLogin}>LOGIN</Text>
             <View style={style.inputWrapper}>
                 <Image style={style.iconUser} source={require('../assets/avt_user.png')} />
-                <TextInput style={style.inputItem} placeholder="Name"/>
+                <TextInput style={style.inputItem} placeholder="Name" onChangeText={setName} value={name} />
                 <Image style={style.iconLock} source={require('../assets/lock2.png')} />
-                <TextInput style={style.inputItem} placeholder="Password"/>
-                <Image style={style.iconEye} source={require('../assets/eye.png')} />
+                <TextInput style={style.inputItem} placeholder="Password" onChangeText={setPassword} value={password} secureTextEntry={!showPassword}/>
+                <TouchableOpacity onPress={
+                        () => setShowPassword(!showPassword)
+                    }>
+                    <Image style={style.iconEye} source={require('../assets/eye.png')}/>
+                </TouchableOpacity>
+
             </View>
             <View style={style.btnLoginWrapper}>
-                <TouchableOpacity style={style.btnLogin}>
+                <TouchableOpacity style={style.btnLogin} onPress={loginFunction}>
                     <Text style={style.btnTextLogin}>LOGIN</Text>
                 </TouchableOpacity>
             </View>

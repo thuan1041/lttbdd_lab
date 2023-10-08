@@ -8,8 +8,8 @@ import Tiki_Ok from './components/Tiki_Ok';
 export default function App() {
   return (
     <Lab4_2a/>,
-    <Lab4_2b/>,
-    <Lab4_2c/>,
-    <Tiki_Ok/>
+    <Lab4_2b/>
+    // <Lab4_2c/>,
+    // <Tiki_Ok/>
   );
 }

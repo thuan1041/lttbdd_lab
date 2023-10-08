@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { StyleSheet, Text, View, TouchableOpacity, TextInput, Image} from "react-native";
 function Lab4_2b() {
+    const [shareTxt, setShareTxt] = useState("");
     return (  
         <View style={styles.container}>
             <View style={styles.headerWrapper}>
@@ -19,8 +21,10 @@ function Lab4_2b() {
                     <Image style={styles.addImg} source={require("../assets/camera.png")}/>
                     <Text style={styles.addImgTxt}>Thêm hình ảnh</Text>
                 </TouchableOpacity>
-                    <TextInput style={styles.shareTxt} placeholder="Hãy chi sẻ những điều mà bạn thích về sản phẩm" multiline={true} numberOfLines={10}></TextInput>
-                <TouchableOpacity style={styles.shareWrapper}>
+                    <TextInput style={styles.shareTxt} placeholder="Hãy chi sẻ những điều mà bạn thích về sản phẩm" multiline={true} numberOfLines={10} onChangeText={setShareTxt} value={shareTxt}></TextInput>
+                <TouchableOpacity style={styles.shareWrapper} onPress={()=>{
+                    console.log(`Ý kiến: ${shareTxt}`);
+                }} >
                     <Text style={styles.btnGui}>Gửi</Text>
                 </TouchableOpacity>
             </View>

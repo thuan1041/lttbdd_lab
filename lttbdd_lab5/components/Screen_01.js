@@ -1,6 +1,9 @@
+import {useState} from "react"
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
-function Screen_01() {
+function Screen_01({navigation, route}) {
+    const [price,setPrice] = useState("1.790.000 đ");
+    const img = route.params;
     return ( 
         <View style = { styles.container } >
             <TouchableOpacity style={styles.ImgWrapper} >
@@ -25,10 +28,17 @@ function Screen_01() {
                     <Text style={styles.refundIcon}>?</Text>
                 </View>
             </View>
-            <View style={styles.slectColorWrapper}>
+            <TouchableOpacity style={styles.slectColorWrapper} onPress={
+                () => {
+                }
+
+            }>
                 <Text style={styles.slectColorTxt}>4 MÀU-CHỌN MÀU</Text>
-                <Text style={styles.slectColorICom}></Text>
-            </View>
+                <Image style={styles.slectColorImg} source={require("../assets/Vector.png")}></Image>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.btnWrapper}>
+                <Text style={styles.btnBuy}>CHỌN MUA</Text>
+            </TouchableOpacity>
         </View>
     );
 }
@@ -139,5 +149,43 @@ const styles = StyleSheet.create({
     refundIcon:{
         color:"#000000"
     },
-
+    slectColorWrapper:{
+        width: 332,
+        height: 34,
+        borderRadius: 10,
+        borderWidth: 2,
+        marginTop: 30,
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
+    slectColorTxt:{
+        fontFamily: 'Roboto',
+        fontWeight: 400,
+        fontSize: 15,
+        lineHeight: 18,
+        textAlign: 'center',
+        left: 100
+    },
+    slectColorImg:{
+        width:11.5,
+        height:14,
+        marginLeft:160
+    },
+    btnWrapper:{
+        width:332,
+        height:44,
+        backgroundColor:"#EE0A0A",
+        borderRadius:10,
+        // borderWidth:1,
+        justifyContent:'center',
+        alignItems:'center',
+        marginTop:20
+    },
+    btnBuy:{
+        fontFamily:"Roboto",
+        fontWeight:700,
+        fontSize:18,
+        color:"#FFFFFF",
+        lineHeight:21.09,
+    }
 });

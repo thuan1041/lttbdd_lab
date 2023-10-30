@@ -3,7 +3,7 @@ import AP_Screen_02 from "./AP_Screen_02";
 import { useNavigation } from "@react-navigation/native";
 
   
-function AP_Screen_01(navigation,router) {
+function AP_Screen_01({navigation}) {
     // const navigation = useNavigation();
     return ( 
         <View style={styles.container}>
@@ -14,9 +14,9 @@ function AP_Screen_01(navigation,router) {
                 <TextInput style={styles.inputTxt} placeholder="Enter your name"></TextInput>
             </TouchableOpacity>
             <TouchableOpacity style={styles.btnWrapper}
-                onPress={()=>{
+                onPress ={()=>{
                     navigation.navigate('AP_Screen_02')
-                    }}>
+                }}>
                 <Text style={styles.btnTxt}>Get Started </Text>
             </TouchableOpacity>
         </View>

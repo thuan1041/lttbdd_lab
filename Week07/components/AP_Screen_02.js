@@ -1,7 +1,7 @@
 import { Image, StyleSheet, View } from "react-native";
 
   
-function AP_Screen_02(navigation) {
+function AP_Screen_02({navigation, route}) {
     return ( 
         <View style={styles.container}>
         </View>

@@ -11,7 +11,7 @@ const Stack = createNativeStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='AP_Screen_01'>
+      <Stack.Navigator >
         <Stack.Screen name = "AP_Screen_01" component={AP_Screen_01}/>
         <Stack.Screen name = "AP_Screen_02" component={AP_Screen_02}/>
         <Stack.Screen name = "AP_Screen_03" component={AP_Screen_03}/>

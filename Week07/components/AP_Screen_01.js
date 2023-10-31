@@ -1,21 +1,25 @@
 import { Image, StyleSheet, View, Text, TextInput, TouchableOpacity } from "react-native";
 import AP_Screen_02 from "./AP_Screen_02";
 import { useNavigation } from "@react-navigation/native";
+import { useState } from "react";
 
   
 function AP_Screen_01({navigation}) {
-    // const navigation = useNavigation();
+    const [name, setName] = useState('Tran Minh Thuan');
     return ( 
         <View style={styles.container}>
             <Image style={styles.imgHeader} source={require("../assets/Image 95.png")}></Image>
             <Text style={styles.headerTxt}>MANAGE YOUR <br></br>TASK</Text>
             <TouchableOpacity style={styles.inputWrapper}>
                 <Image style={styles.imgInput} source={require("../assets/Frame.png")}></Image>
-                <TextInput style={styles.inputTxt} placeholder="Enter your name"></TextInput>
+                {/* <TextInput style={styles.inputTxt} placeholder="Enter your name" onChangeText={name =>{
+                    setName(name)
+                }}></TextInput> */}
+                <TextInput style={styles.inputTxt} placeholder="Enter your name" onChangeText={(name)=>{setName(name)}}></TextInput>
             </TouchableOpacity>
             <TouchableOpacity style={styles.btnWrapper}
                 onPress ={()=>{
-                    navigation.navigate('AP_Screen_02')
+                    navigation.navigate('AP_Screen_02', {nameTxt:name})
                 }}>
                 <Text style={styles.btnTxt}>Get Started </Text>
             </TouchableOpacity>

@@ -12,11 +12,14 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName='AP_Screen_01'>
-        <Stack.Screen name = "AP_Screen_01" component={AP_Screen_01}/>
-        <Stack.Screen name = "AP_Screen_02" component={AP_Screen_02} options={
-          {headerShown:false}
+        <Stack.Screen name = "AP_Screen_01" component={AP_Screen_01} options={{
+            headerShown:false}
         }/>
-        <Stack.Screen name = "AP_Screen_03" component={AP_Screen_03}/>
+        <Stack.Screen name = "AP_Screen_02" component={AP_Screen_02} options={{
+            headerShown:false
+          }
+        } />
+        <Stack.Screen name = "AP_Screen_03" component={AP_Screen_03} options={{headerShown:false}}/>
       </Stack.Navigator>          
     </NavigationContainer>
     // <AP_Screen_02/>

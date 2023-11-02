@@ -5,7 +5,7 @@ import { useState } from "react";
 
   
 function AP_Screen_01({navigation}) {
-    const [name, setName] = useState('Tran Minh Thuan');
+    const [name, setName] = useState('Thuan');
     return ( 
         <View style={styles.container}>
             <Image style={styles.imgHeader} source={require("../assets/Image 95.png")}></Image>
@@ -36,10 +36,12 @@ const styles = StyleSheet.create({
         flex:1,
         flexDirection:"column",
         alignItems:"center",
+        backgroundColor:"#fff",
     },
     imgHeader:{
         width: 271,
         height: 271,
+        marginTop:30
 
     },
     headerTxt:{

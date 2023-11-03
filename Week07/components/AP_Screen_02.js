@@ -12,6 +12,9 @@ function AP_Screen_02({navigation, route}) {
     var [isLoading, setLoading] = useState(true);
     var [data2, setData2] = useState([]);
     var [textNotifi, setNotifi] = useState("")
+    var [todosAPI,setTodosAPI] = useState([])
+    var nameTodo
+
     console.log(textNotifi)
 
     var getListTodos = () =>{
@@ -28,25 +31,25 @@ function AP_Screen_02({navigation, route}) {
             // getOneTodo()
         })
     }
-var isCheck = false 
+
+
+    var isCheck = false 
     var getOneTodo = () =>{
         data.forEach(item => {
             if(nameTxt==item.name){
-            var todos = item.mytodo;
-            setData2(todos);
+                todosAPI = item.mytodo
+                let idAPI = item.id
+                let nameAPI = item.name
+                // nameTodo = item.mytodo.nameTodo
+                setTodosAPI(todosAPI)
+                setData2(todosAPI)
+            }
+            })
             isCheck = true
-            // console.log(data2)
-        }
-    });
-    }
-    // const getOneTodo = () => {
-    //     // Find the todo with the matching nameTxt
-    //     const todo = data.find((item) => item.name === nameTxt);
-    
-    //     if (todo) {
-    //       setData2(todo.mytodo);
-    //     }
-    //   };
+            console.log({todosAPI})
+            console.log({data2})
+        } 
+
     useEffect(() => {
         if (data.length > 0 && data2!=null) {
             getOneTodo();
@@ -68,20 +71,22 @@ var isCheck = false
         };
     },[]
     )
+
     const notifi = () =>{
         setNotifi("Khong co du lieu")
     }
-    var renderItem = ({item})=>(
+    const Item = ({idAPI, nameTodo, complete})=>(
 
             <View style={styles.itemWrapper}>
                 <TouchableOpacity style={styles.imgWrapper}>
-                    {(item.complete)?(
+                    {(complete)?(
                         <Image style={styles.imgItem} source={require("../assets/Frame2.png")}></Image>):
                         (<Image style={styles.imgItem} source={require("../assets/Flat_cross_icon.svg.png")}></Image>)
                     }
                 </TouchableOpacity>
                 <View style={styles.todoWrapper} >
-                    <Text style={styles.todoTxt}>{item.nameTodo}</Text>
+                    <TextInput style={styles.todoTxt} value={nameTodo}></TextInput>
+                    <TextInput style={styles.todoTxt} value={idAPI}></TextInput>
                 </View>
                 <TouchableOpacity style={styles.imgWrapper}>
                     <Image style={styles.imgItem} source={require("../assets/Frame (1).png")}></Image>
@@ -121,14 +126,17 @@ var isCheck = false
                 {isLoading ? <ActivityIndicator></ActivityIndicator> : (
                     <FlatList                         
                     data={data2}
-                    renderItem={renderItem}>
-                        {/* ({item})=><Item id={item.id} title={item.title}/> */}
+                    // renderItem={renderItem}>
+                    // renderItem={({item}) => <Item id={item.id} name ={item.name} nameTodo={item.mytodo.nameTodo} complete={item.mytodo.complete}></Item>}
+                    renderItem={({item}) => <Item idAPI={item.idAPI} nameTodo={item.nameTodo} complete ={item.complete} ></Item>}
+                    >
                     </FlatList>)
                 }
             </SafeAreaView>
             <TouchableOpacity style={styles.plusWrapper}>
                 <Text style={styles.plusTxt} onPress={()=>{
-                    navigation.navigate('AP_Screen_03', {nameTxt})
+                    // navigation.navigate('AP_Screen_03', {nameTxt})
+                    getOneTodo()
                 }}>+</Text>
             </TouchableOpacity>
         </View>
@@ -171,6 +179,9 @@ const styles = StyleSheet.create({
         fontFamily:"Inter",
         fontWeight:700,
         fontSize:16,
+        height:24,
+        width:"100%",
+        lineHeight:24,
     },
     imgInput:{
         width:24,

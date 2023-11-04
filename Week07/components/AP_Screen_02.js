@@ -14,10 +14,12 @@ function AP_Screen_02({navigation, route}) {
     var [textNotifi, setNotifi] = useState("")
     var [todosAPI,setTodosAPI] = useState([])
     var nameTodo
+    var newItem 
+    var idAPI
 
     console.log(textNotifi)
 
-    var getListTodos = () =>{
+    const getListTodos = () =>{
         const api = "https://6540b01945bedb25bfc25993.mockapi.io/todos/todo";
         fetch(api)
         .then(res => res.json())
@@ -28,27 +30,34 @@ function AP_Screen_02({navigation, route}) {
             console.log(err)
         }).finally(()=>{
             setLoading(false)
-            // getOneTodo()
         })
     }
 
 
     var isCheck = false 
-    var getOneTodo = () =>{
+    const getOneTodo = () =>{
         data.forEach(item => {
             if(nameTxt==item.name){
                 todosAPI = item.mytodo
-                let idAPI = item.id
+                idAPI = item.id
                 let nameAPI = item.name
-                // nameTodo = item.mytodo.nameTodo
+
+                // newItem = {
+                //     id: idAPI,
+                //     name: nameAPI,
+                //     mytodo: todosAPI
+                //   };
+                // setData2(newItem)
                 setTodosAPI(todosAPI)
-                setData2(todosAPI)
+                setData2((item)=>[...item, todosAPI, idAPI, nameAPI])
+                console.log(data2)
             }
-            })
+        })
+            
             isCheck = true
             console.log({todosAPI})
-            console.log({data2})
-        } 
+            console.log(data2)
+        }
 
     useEffect(() => {
         if (data.length > 0 && data2!=null) {
@@ -63,10 +72,12 @@ function AP_Screen_02({navigation, route}) {
             isCheck = false
         }
 
-    }, [{data}]);
+    }, [data]);
+
 
     useEffect(() =>{
         getListTodos();
+
         return ()=>{
         };
     },[]
@@ -75,8 +86,8 @@ function AP_Screen_02({navigation, route}) {
     const notifi = () =>{
         setNotifi("Khong co du lieu")
     }
-    const Item = ({idAPI, nameTodo, complete})=>(
-
+    
+    const Item = ({ nameTodo, complete})=>(
             <View style={styles.itemWrapper}>
                 <TouchableOpacity style={styles.imgWrapper}>
                     {(complete)?(
@@ -86,7 +97,7 @@ function AP_Screen_02({navigation, route}) {
                 </TouchableOpacity>
                 <View style={styles.todoWrapper} >
                     <TextInput style={styles.todoTxt} value={nameTodo}></TextInput>
-                    <TextInput style={styles.todoTxt} value={idAPI}></TextInput>
+                    {/* <TextInput style={styles.todoTxt} value={idAPI}></TextInput> */}
                 </View>
                 <TouchableOpacity style={styles.imgWrapper}>
                     <Image style={styles.imgItem} source={require("../assets/Frame (1).png")}></Image>
@@ -115,28 +126,21 @@ function AP_Screen_02({navigation, route}) {
                 <Image style={styles.imgInput} source={require("../assets/Framesearch.png")}></Image>
                 <TextInput style={styles.searchTxt} placeholder="Search"></TextInput>
             </TouchableOpacity>
-            {/* <Text style={{display : textNotifi===""? "none" : "flex"}} onChangeText={(textNotifi)=> {setNotifi(textNotifi) 
-            }}>{textNotifi}</Text> */}
             <Text style={{display : textNotifi==""? "none" : "flex"}} >{textNotifi}</Text>
-            {/* {
-                textNotifi!=""?<Text>Rong</Text>:<Text>Test</Text>
-            } */}
-            {/* <TextInput style={{ display: textNotifi === "" ? 'none' : 'flex' }} onChangeText={(textNotifi)=> setNotifi(textNotifi)}>{textNotifi}</TextInput> */}
             <SafeAreaView>
                 {isLoading ? <ActivityIndicator></ActivityIndicator> : (
                     <FlatList                         
-                    data={data2}
+                    data={todosAPI}
                     // renderItem={renderItem}>
                     // renderItem={({item}) => <Item id={item.id} name ={item.name} nameTodo={item.mytodo.nameTodo} complete={item.mytodo.complete}></Item>}
-                    renderItem={({item}) => <Item idAPI={item.idAPI} nameTodo={item.nameTodo} complete ={item.complete} ></Item>}
+                    renderItem={({item}) => <Item  nameTodo={item.nameTodo} complete ={item.complete} ></Item>}
                     >
                     </FlatList>)
                 }
             </SafeAreaView>
             <TouchableOpacity style={styles.plusWrapper}>
                 <Text style={styles.plusTxt} onPress={()=>{
-                    // navigation.navigate('AP_Screen_03', {nameTxt})
-                    getOneTodo()
+                    navigation.navigate('AP_Screen_03', {nameTxt, idAPI, todosAPI})
                 }}>+</Text>
             </TouchableOpacity>
         </View>
